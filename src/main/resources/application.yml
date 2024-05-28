@@ -1,0 +1,83 @@
+spring:
+  application:
+    name: demo
+  kafka:
+    properties:
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='YOUR_KAFKA_USERNAME' password='YOUR_KAFKA_PASSWORD';
+      security:
+        protocol: SASL_SSL
+      session:
+        timeout:
+          ms: 45000
+    bootstrap-servers: pkc-12576z.us-west2.gcp.confluent.cloud:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: my-group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  data:
+    mongodb:
+      uri: mongodb+srv://YOUR_MONGO_USER:YOUR_MONGO_PASSWORD@cluster0.mongodb.net/testdb?retryWrites=true&w=majority&appName=Cluster0
+
+  mail:
+    host: smtp.mailgun.org
+    port: 587
+    username: YOUR_MAILGUN_USERNAME
+    password: YOUR_MAILGUN_PASSWORD
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+        from: contact@yourdomain.com
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+
+cloud:
+  gcp:
+    project-id: YOUR_GCP_PROJECT_ID
+    credentials:
+      encoded-key: YOUR_GCP_ENCODED_KEY
+
+server:
+  port: 8081
+
+kafka:
+  topic:
+    name: topic_0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: My Super App
+    description: This is a demo application
+    version: 1.0.0
+
+mail:
+  from:
+    name: AwesomeApp
