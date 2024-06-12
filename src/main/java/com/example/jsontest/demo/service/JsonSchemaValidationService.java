@@ -63,7 +63,7 @@ public class JsonSchemaValidationService {
             log.info("Event is valid");
             kafkaTemplate.send(TOPIC_NAME, jsonNode.toString());
             // Send email notification
-            emailService.sendSimpleMessage("folded.goat@gmail.com", "Valid JSON Event", "The JSON event is valid:\n" + jsonNode.toString());
+            emailService.sendSimpleMessage("foldedgoat@gmail.com", "Valid JSON Event", "The JSON event is valid:\n" + jsonNode.toString());
             gcpStorageService.uploadJsonToGCPStorage("test-bucketz-01", "test", "test.json", "{\"json\": \"event\"}");
 
         } else {
